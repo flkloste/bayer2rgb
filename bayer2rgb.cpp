@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
     int depth = 8; //bit depth
 
     std::vector<uint8_t> imageData;
-    imageData.reserve(width * height * (depth/8));
+    imageData.reserve(width * height * depth / 8);
 
     int cvType = CV_MAKETYPE(CV_8U, 1);
     cv::Mat bayerSource(height, width, cvType, &imageData[0]);
@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 
     // read image
     std::ifstream inputFile(bayerFilePath, std::ios::binary);
-    read_n_bytes(inputFile, width * height * (depth/8), std::back_inserter(imageData));
+    read_n_bytes(inputFile, width * height * depth / 8, std::back_inserter(imageData));
 
     cv::cvtColor(bayerSource, rgb16Dest, CV_BayerGR2RGB);
 
